@@ -1,65 +1,89 @@
-## Website Performance Optimization portfolio project
+Web Optimization Project
+==================
+#####Udacity FE Web Developer Nanodegree - Project 4#####
+---
 
-Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).
+Contents
+--------
 
-To get started, check out the repository, inspect the code,
+1. [How to Run / Test](#chapter-1)  
+2. [Optimizations Performed](#chapter-2)  
+3. [Resources Used](#chapter-3)    
 
-### Getting started
+How to Run / Test <a id="chapter-1"></a>
+-----------------
+There are two ways for you to test/demo my Web Optimization work:    
 
-Some useful tips to help you get started:
+1. Simply visit the [live version](http://www.sweetwaterhandball/opt/index.html "Web Optimization Project") hosted on my web server.  
+2. Download the Git ZIP, extract, and run maps.html on your favorite browser. 
 
-1. Check out the repository
-1. To inspect the site on your phone, you can run a local server
+Each page has optimized to achieve a 90+ Google PageSpeed score. In addition, the views/pizza.html page and its associated Javascript have optimized to achieve a 60+ FPS rendering speed. I have included two versions of each HTML page: a production version and a development version.  
+- The production versions include minified CSS and Javascript, and run optimally. They are the .html files (e.g. index.html).
+- The development versions include no minification, so that you can more easily read through the code and understand what's happening. Theey are the _dev.html files (e.g. index_dev.html). 
 
-  ```bash
-  $> cd /path/to/your-project-folder
-  $> python -m SimpleHTTPServer 8080
-  ```
+Optimizations Performed <a id="chapter-2"></a>
+----------
+<table>
+<tr><th>Page</th><th>Optimizations</th><th>New PageSpeed Speed Score (Mobile/Desktop)</th></tr>
+<tr><td>index.html, project-2048.html, project-webperf.html</td>
+<td>
+- Optimized all images  
+- Inlined CSS and Javascript  
+- Minified CSS and Javascript  
+- Moved Javascript files to end of mark-up  
+- Added "asynch" tag to Google Analytics script
+</td>
+<td>97/97</td></tr>
+<tr><td>project-mobile.html</td>
+<td>
+- Optimized all images  
+- Inlined CSS and Javascript  
+- Minified CSS and Javascript  
+- Moved Javascript files to end of mark-up  
+- Added "asynch" tag to Google Analytics script  
+</td>
+<td>96/97</td></tr>
+<tr><td>views/pizza.html</td>
+<td>
+- Optimized all images  
+- Inlined CSS and Javascript  
+- Minified CSS and Javascript  
+- Moved Javascript files to end of mark-up  
+</td>
+<td>95/96</td></tr>
+<tr><td>views/js/main.js</td>
+<td>
+- Minimized DOM updates by consolidating innerHTML  
+- Prevented superfluous DOM elements from being rendered  
+- See comments on lines 346, 414, 435, 474, 505, 519  
+</td>
+<td>Consistent FPS of 60+</td></tr>
+</table>
 
-1. Open a browser and visit localhost:8080
-1. Download and install [ngrok](https://ngrok.com/) to make your local server accessible remotely.
+Resources Used <a id="chapter-3"></a>
+---------
+<dl><dt>Google Maps API</dt>
+<dd>I used the Google Maps API to create the map that serves as the primary application view in both the desktop and mobile version of the application. I wrote custom Knockout JS binding handlers that link the markers on the map (both search results and favorites) to observable arrays.</dd>  
 
-  ``` bash
-  $> cd /path/to/your-project-folder
-  $> ngrok 8080
-  ```
+<dt>Yelp! API</dt>
+<dd>Of all the business search APIs I researched, Yelp was my favorite. The Yelp Development Guide recommends creating a server-side script (e.g. in PHP) to handle AJAX calls rather than making calls directly from Javascript, so I wrote a PHP script that the application calls (see the PHP folder in this Github project). I used the Yelp API to retrieve rating, review, and location information about businesses.</dd>
 
-1. Copy the public URL ngrok gives you and try running it through PageSpeed Insights! [More on integrating ngrok, Grunt and PageSpeed.](http://www.jamescryer.com/2014/06/12/grunt-pagespeed-and-ngrok-locally-testing/)
+<dt>Open Weather</dt>
+<dd>Open Weather is a simple, open-source API that I used to create Weather Widgets for the various neighborhoods. An initial AJAX call (at app start-up) fetches the weather information for each neighborhood from Open Weather. That information is then data-bound to the neighborhood selector (via Knockout) so that the appropriate weather is displayed when the user toggles between neighborhoods.</dd>
 
-Profile, optimize, measure... and then lather, rinse, and repeat. Good luck!
+<dt>Google Streetview</dt>
+<dd>This simple API (which doesn't even require AJAX) was used to add Streetview images for each of the locations in the search and/or favorites arrays.</dd></dl>
 
-### Optimization Tips and Tricks
-* [Optimizing Performance](https://developers.google.com/web/fundamentals/performance/ "web performance")
-* [Analyzing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/analyzing-crp.html "analyzing crp")
-* [Optimizing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/optimizing-critical-rendering-path.html "optimize the crp!")
-* [Avoiding Rendering Blocking CSS](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-blocking-css.html "render blocking css")
-* [Optimizing JavaScript](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/adding-interactivity-with-javascript.html "javascript")
-* [Measuring with Navigation Timing](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/measure-crp.html "nav timing api"). We didn't cover the Navigation Timing API in the first two lessons but it's an incredibly useful tool for automated page profiling. I highly recommend reading.
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/eliminate-downloads.html">The fewer the downloads, the better</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/optimize-encoding-and-transfer.html">Reduce the size of text</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/image-optimization.html">Optimize images</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching.html">HTTP caching</a>
+Additional Notes <a id="chapter-4"></a>
+----------------
+Libraries used in this application included:  
+- Knockout JS
+- jQuery
+- Bootstrap
 
-### Customization with Bootstrap
-The portfolio was built on Twitter's <a href="http://getbootstrap.com/">Bootstrap</a> framework. All custom styles are in `dist/css/portfolio.css` in the portfolio repo.
+I also learned quite a bit about custom Knockout JS data binding by reviewing [this very helpful article] (http://www.codeproject.com/Articles/351298/KnockoutJS-and-Google-Maps-binding "KnockoutJS and Google Maps Binding").  
 
-* <a href="http://getbootstrap.com/css/">Bootstrap's CSS Classes</a>
-* <a href="http://getbootstrap.com/components/">Bootstrap's Components</a>
+Finally, I should note that the Development Guide for the Yelp API encourages developers to use a server-side script (e.g. PHP) rather than Javascript. I followed this advice and created my own PHP script, which I've included in this project (under the PHP folder).  
 
-### Sample Portfolios
+Because Internet Explorer does not accept cross-origin browser requests, if you want to demo this application in IE you'll need to either (1) install the PHP script on your server (or whichever server you plan to run the project from), or (2) simply use the live link I've provided at the top of this article.
 
-Feeling uninspired by the portfolio? Here's a list of cool portfolios I found after a few minutes of Googling.
-
-* <a href="http://www.reddit.com/r/webdev/comments/280qkr/would_anybody_like_to_post_their_portfolio_site/">A great discussion about portfolios on reddit</a>
-* <a href="http://ianlunn.co.uk/">http://ianlunn.co.uk/</a>
-* <a href="http://www.adhamdannaway.com/portfolio">http://www.adhamdannaway.com/portfolio</a>
-* <a href="http://www.timboelaars.nl/">http://www.timboelaars.nl/</a>
-* <a href="http://futoryan.prosite.com/">http://futoryan.prosite.com/</a>
-* <a href="http://playonpixels.prosite.com/21591/projects">http://playonpixels.prosite.com/21591/projects</a>
-* <a href="http://colintrenter.prosite.com/">http://colintrenter.prosite.com/</a>
-* <a href="http://calebmorris.prosite.com/">http://calebmorris.prosite.com/</a>
-* <a href="http://www.cullywright.com/">http://www.cullywright.com/</a>
-* <a href="http://yourjustlucky.com/">http://yourjustlucky.com/</a>
-* <a href="http://nicoledominguez.com/portfolio/">http://nicoledominguez.com/portfolio/</a>
-* <a href="http://www.roxannecook.com/">http://www.roxannecook.com/</a>
-* <a href="http://www.84colors.com/portfolio.html">http://www.84colors.com/portfolio.html</a>
